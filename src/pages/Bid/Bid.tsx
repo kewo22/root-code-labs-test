@@ -1,40 +1,46 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { VehicleBid } from "../../interfaces/vehicleBid";
 
 import './style.scss'
 
 const Bid: FC = (): ReactElement => {
 
-    const x = {
-        "id": "1",
-        "name": "T-Cross",
-        "details": {
-            "currency": "LKR",
-            "price": 20000000,
-            "color": "#151D3B",
-            "brand": "Volkswagen",
-            "manufactureYear": "2018",
-            "image": "https://cdn.imagin.studio/getImage?angle=01&billingTag=web&customer=carwow&make=volkswagen&modelFamily=t-cross&modelVariant=estate&modelYear=2019&paintDescription=solid---pure-white+FFFFFF&paintId=30598&tailoring=carwow&width=800&zoomLevel=0&zoomType=fullscreen",
-            "description": "Roomy small SUV with lots of kit"
-        }
-    };
+    const vehicleBids = useSelector((state: any) => state.vehicles.vehicleBids);
+    const [sum, setSum] = useState(0);
+
+    useEffect(() => {
+        const sum = vehicleBids.reduce((accumulator: number, object: VehicleBid) => {
+            return accumulator + object.bidAmount;
+        }, 0);
+        setSum(sum)
+    }, [])
+
 
     return (
         <>
             <h1>Biddings</h1>
-            <div className="bid-wrapper">
-                <div className="vehicle-details">
-                    <img src={x.details.image} alt="vehicle" />
-                    <p>{x.name}</p>&nbsp;
-                    <p>{x.details.brand}</p>&nbsp;
-                    <p>{x.details.manufactureYear}</p>
-                </div>
-                <div className="bid-amount">
-                    2,000,000 LKR
-                </div>
-            </div>
+            {
+                vehicleBids.length &&
+                vehicleBids.map((vehicleBid: VehicleBid, key: number) => (
+                    <div key={key} className="bid-wrapper">
+                        <div className="vehicle-details">
+                            <img src={vehicleBid.image} alt="vehicle" />
+                            <p>{vehicleBid.name}</p>&nbsp;
+                            <p>{vehicleBid.brand}</p>&nbsp;
+                            <p>{vehicleBid.manufactureYear}</p>
+                        </div>
+                        <div className="bid-amount">
+                            {vehicleBid.bidAmount} LKR
+                        </div>
+                    </div>
+                ))
+            }
+
             <div>
-                TOTAL
+                TOTAL {sum}
             </div>
+
         </>
     );
 

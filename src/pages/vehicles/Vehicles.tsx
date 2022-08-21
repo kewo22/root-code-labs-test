@@ -1,18 +1,25 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
+import useValidateBidAmount from "../../hooks/useValidateBidAmount";
 import useFetchData from "../../hooks/useFetch";
+
+import { addVehicle } from "../../store/slice";
 
 import { Vehicle } from "../../interfaces/vehicle";
 
 import Card from "../../components/Card/Card";
 
 import './style.scss'
-import useValidateBidAmount from "../../hooks/useValidateBidAmount";
+import { VehicleBid } from "../../interfaces/vehicleBid";
 
 const Vehicles: FC = (): ReactElement => {
 
     const navigate = useNavigate()
+
+    const dispatch = useDispatch();
 
     const { fetchData } = useFetchData();
     const { validate } = useValidateBidAmount();
@@ -31,7 +38,16 @@ const Vehicles: FC = (): ReactElement => {
 
     const onClick = (vehicle: Vehicle) => {
         const isValid = validate(vehicle, bidAmount);
-        console.log(isValid)
+        if (isValid) {
+            const vehicleBid: VehicleBid = {
+                image: vehicle.details.image,
+                name: vehicle.name,
+                brand: vehicle.details.brand,
+                manufactureYear: vehicle.details.manufactureYear,
+                bidAmount: bidAmount
+            }
+            dispatch(addVehicle(vehicleBid))
+        }
     }
 
     const onChange = (e: string) => {

@@ -9,7 +9,7 @@ interface Details {
     price: number;
     color: string;
     brand: string;
-    manufactureYear: string;
+    manufactureYear: number;
     image: string;
     description: string;
 }
