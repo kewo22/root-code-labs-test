@@ -9,11 +9,11 @@ import useFetchData from "../../hooks/useFetch";
 import { addVehicle } from "../../store/slice";
 
 import { Vehicle } from "../../interfaces/vehicle";
+import { VehicleBid } from "../../interfaces/vehicleBid";
 
 import Card from "../../components/Card/Card";
 
 import './style.scss'
-import { VehicleBid } from "../../interfaces/vehicleBid";
 
 const Vehicles: FC = (): ReactElement => {
 
