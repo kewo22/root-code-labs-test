@@ -25,8 +25,7 @@ const Vehicle: FC = (): ReactElement => {
 
     const getVehicle = async () => {
         const vehicle = await fetchData(`vehicles/${vehicleId}`);
-        if (vehicle) console.log(vehicle)
-        setVehicle(vehicle);
+        if (vehicle) setVehicle(vehicle);
     }
 
     const onBackClick = () => {
@@ -59,7 +58,7 @@ const Vehicle: FC = (): ReactElement => {
                             <br />
                             <span className="desc">Description</span>
                             <p>{vehicle.details.description}</p>
-                            <Input/>
+                            <Input />
                         </div>
                         <button onClick={onClick}>Submit</button >
                     </div>
