@@ -1,6 +1,7 @@
 import { FC, ReactElement, useState } from "react";
 
 import { CardProps } from "../../interfaces/props/card";
+import Input from "../Input/Input";
 
 import './style.scss';
 
@@ -26,11 +27,11 @@ const Card: FC<CardProps> = (props: CardProps): ReactElement => {
         <div className="card" >
             <img src={image} alt='img' />
             <h1>{title}</h1>
-            <p>{description}</p>
-            <input type="number" min={0} placeholder="Amount" onChange={onInputChange} /> LKR
+            <p>{description}</p> 
+            <Input onChange={onInputChange} />
             <br />
             <button onClick={onDetailClick}>Details</button >
-            <button disabled={isButtonDisabled} onClick={onClick}>Submit</button >
+            <button disabled={isButtonDisabled} onClick={onClick}>Submit</button>
         </div >
 
     );

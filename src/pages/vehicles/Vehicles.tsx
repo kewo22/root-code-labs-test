@@ -8,12 +8,14 @@ import { Vehicle } from "../../interfaces/vehicle";
 import Card from "../../components/Card/Card";
 
 import './style.scss'
+import useValidateBidAmount from "../../hooks/useValidateBidAmount";
 
 const Vehicles: FC = (): ReactElement => {
 
     const navigate = useNavigate()
 
     const { fetchData } = useFetchData();
+    const { validate } = useValidateBidAmount();
 
     const [bidAmount, setBidAmount] = useState<number>(0);
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -28,15 +30,8 @@ const Vehicles: FC = (): ReactElement => {
     }
 
     const onClick = (vehicle: Vehicle) => {
-        if (Math.sign(bidAmount) === -1) {
-            alert('invalid bid amount')
-            return;
-        }
-
-        if (bidAmount <= vehicle.details.price) {
-            alert('amount should be greater that car value')
-            return;
-        }
+        const isValid = validate(vehicle, bidAmount);
+        console.log(isValid)
     }
 
     const onChange = (e: string) => {

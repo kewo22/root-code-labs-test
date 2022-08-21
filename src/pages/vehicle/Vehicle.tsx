@@ -1,5 +1,6 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 import useFetchData from "../../hooks/useFetch";
 
@@ -32,16 +33,36 @@ const Vehicle: FC = (): ReactElement => {
         navigate('/vehicles')
     }
 
+    const onClick = () => {
+
+    }
+
     return (
         <>
             {vehicle && (
-                <div className="vehicles-wrapper">
+                <div className="vehicle-wrapper">
                     <button className="back-btn" onClick={onBackClick}>
                         <span className="material-symbols-outlined">
                             arrow_back
                         </span>
                         Back
                     </button>
+                    <div className="vehicle-details">
+                        <img src={vehicle.details.image} alt="vehicle" />
+                        <div>
+                            <span className="title">
+                                {vehicle.details.brand}{' '}
+                                {vehicle.name} {' '}
+                                {vehicle.details.manufactureYear}
+                            </span>
+                            <br />
+                            <br />
+                            <span className="desc">Description</span>
+                            <p>{vehicle.details.description}</p>
+                            <Input/>
+                        </div>
+                        <button onClick={onClick}>Submit</button >
+                    </div>
                 </div>
             )}
         </>
