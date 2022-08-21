@@ -1,31 +1,25 @@
-.wrapper {
-	margin: 0 10rem;
+.top-section {
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    .top-section{
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+	.icon-button {
+		background-color: transparent;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		color: #8d8d8d;
 
-        .icon-button{
-            background-color: transparent;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            color: #8d8d8d;
-            
-            :hover{
-                color: black;
-            }
-        }
-    }
-
-	.vehicles-wrapper {
-		display: grid;
-		grid-template-columns: auto auto auto;
-		justify-content: space-between;
-		grid-gap: 10px;
+		:hover {
+			color: black;
+		}
 	}
 }
 
-
+.vehicles-wrapper {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	justify-content: space-between;
+	grid-gap: 10px;
+}

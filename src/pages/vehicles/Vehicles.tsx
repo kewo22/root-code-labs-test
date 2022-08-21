@@ -1,7 +1,12 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "../../components/Card/Card";
+
 import useFetchData from "../../hooks/useFetch";
+
+import { Vehicle } from "../../interfaces/vehicle";
+
+import Card from "../../components/Card/Card";
+
 import './style.scss'
 
 const Vehicles: FC = (): ReactElement => {
@@ -11,7 +16,7 @@ const Vehicles: FC = (): ReactElement => {
     const { fetchData } = useFetchData();
 
     const [bidAmount, setBidAmount] = useState<number>(0);
-    const [vehicles, setVehicles] = useState<any[]>([]);
+    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 
     useEffect(() => {
         getVehicles();
@@ -22,14 +27,14 @@ const Vehicles: FC = (): ReactElement => {
         setVehicles(vehicles);
     }
 
-    const onClick = (vehicle: any) => {
+    const onClick = (vehicle: Vehicle) => {
         if (Math.sign(bidAmount) === -1) {
             alert('invalid bid amount')
             return;
         }
 
         if (bidAmount <= vehicle.details.price) {
-            alert('>>')
+            alert('amount should be greater that car value')
             return;
         }
     }
@@ -49,9 +54,12 @@ const Vehicles: FC = (): ReactElement => {
         navigate('/bid')
     }
 
-    return (
+    const onDetailClick = (vehicle: Vehicle) => {
+        navigate(`/vehicle/${vehicle.id}`)
+    }
 
-        <div className="wrapper">
+    return (
+        <>
             <div className="top-section">
                 <div>
                     <label>Brand</label> <br />
@@ -73,7 +81,7 @@ const Vehicles: FC = (): ReactElement => {
                 </div>
             </div>
             <div className="vehicles-wrapper">
-                {vehicles && vehicles.map((vehicle: any, key) => (
+                {vehicles && vehicles.map((vehicle: Vehicle, key) => (
                     <Card
                         key={key}
                         image={vehicle.details.image}
@@ -81,10 +89,11 @@ const Vehicles: FC = (): ReactElement => {
                         title={vehicle.name}
                         onClick={() => { onClick(vehicle) }}
                         onChange={onChange}
+                        onDetailClick={() => { onDetailClick(vehicle) }}
                     />
                 ))}
             </div>
-        </div>
+        </>
     );
 };
 

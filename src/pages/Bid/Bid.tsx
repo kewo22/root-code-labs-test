@@ -1,4 +1,5 @@
 import { FC, ReactElement } from "react";
+
 import './style.scss'
 
 const Bid: FC = (): ReactElement => {
@@ -18,7 +19,7 @@ const Bid: FC = (): ReactElement => {
     };
 
     return (
-        <div className="wrapper">
+        <>
             <h1>Biddings</h1>
             <div className="bid-wrapper">
                 <div className="vehicle-details">
@@ -34,7 +35,7 @@ const Bid: FC = (): ReactElement => {
             <div>
                 TOTAL
             </div>
-        </div>
+        </>
     );
 
 };

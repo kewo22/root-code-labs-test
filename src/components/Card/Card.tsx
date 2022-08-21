@@ -1,5 +1,7 @@
 import { FC, ReactElement, useState } from "react";
+
 import { CardProps } from "../../interfaces/props/card";
+
 import './style.scss';
 
 const Card: FC<CardProps> = (props: CardProps): ReactElement => {
@@ -9,6 +11,7 @@ const Card: FC<CardProps> = (props: CardProps): ReactElement => {
         title,
         onChange = () => { },
         onClick = () => { },
+        onDetailClick = () => { },
     } = props;
 
     const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
@@ -26,6 +29,7 @@ const Card: FC<CardProps> = (props: CardProps): ReactElement => {
             <p>{description}</p>
             <input type="number" min={0} placeholder="Amount" onChange={onInputChange} /> LKR
             <br />
+            <button onClick={onDetailClick}>Details</button >
             <button disabled={isButtonDisabled} onClick={onClick}>Submit</button >
         </div >
 

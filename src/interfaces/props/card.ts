@@ -3,5 +3,6 @@ export interface CardProps {
     title: string;
     description: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onDetailClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onChange?: (event: string) => void;
 }
