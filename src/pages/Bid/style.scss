@@ -1,0 +1,25 @@
+.wrapper {
+	margin: 0 10rem;
+
+	.bid-wrapper {
+		display: flex;
+		max-width: 600px;
+		padding: 1rem;
+		flex-direction: column;
+		border: 1px solid black;
+
+		img {
+			width: 30%;
+		}
+
+		.vehicle-details {
+			display: flex;
+			font-weight: bold;
+		}
+
+		.bid-amount {
+			display: block;
+			margin-left: auto;
+		}
+	}
+}

@@ -1,13 +1,17 @@
 import { FC, ReactElement, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import useFetchData from "../../hooks/useFetch";
 import './style.scss'
 
 const Vehicles: FC = (): ReactElement => {
 
+    const navigate = useNavigate()
+
+    const { fetchData } = useFetchData();
+
     const [bidAmount, setBidAmount] = useState<number>(0);
     const [vehicles, setVehicles] = useState<any[]>([]);
-    const { fetchData } = useFetchData();
 
     useEffect(() => {
         getVehicles();
@@ -23,7 +27,7 @@ const Vehicles: FC = (): ReactElement => {
             alert('invalid bid amount')
             return;
         }
-        console.log(vehicle.details.price)
+
         if (bidAmount <= vehicle.details.price) {
             alert('>>')
             return;
@@ -39,6 +43,10 @@ const Vehicles: FC = (): ReactElement => {
         const url = value ? `vehicles?details.brand=${value}` : 'vehicles';
         const vehicles = await fetchData(url);
         setVehicles(vehicles);
+    }
+
+    const onBidButtonClick = () => {
+        navigate('/bid')
     }
 
     return (
@@ -57,7 +65,7 @@ const Vehicles: FC = (): ReactElement => {
                     </select>
                 </div>
                 <div>
-                    <button className="icon-button">
+                    <button onClick={onBidButtonClick} className="icon-button">
                         <span className="material-symbols-outlined">
                             local_mall
                         </span>
